@@ -59,10 +59,10 @@ jobs:
         port: 22  # ${{ secrets.PORT }}
         script: |
             sleep 30
-            docker compose down api
+            docker compose down -f ${{env.FILES}} api
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-            docker compose up -d traefik db whoami 
-            docker compose up -d api
+            docker compose -f ${{env.FILES}} up -d traefik db whoami 
+            docker compose -f ${{env.FILES}} up -d api
 
 
 
